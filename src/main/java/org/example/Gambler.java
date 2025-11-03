@@ -6,7 +6,7 @@ public class Gambler {
     private Integer bet;
 
     public Gambler(Integer balance, Integer bet) {
-        this.balance = 1000;
+        this.balance = balance;
         this.bet = bet;
     }
 
@@ -42,8 +42,11 @@ public class Gambler {
         this.balance = this.balance + this.bet * 2;
     }
 
-
     public boolean checkBalance(int bet) {
         return this.balance <= bet;
+    }
+
+    public boolean canBet() {
+        return this.balance >= this.bet;
     }
 }
