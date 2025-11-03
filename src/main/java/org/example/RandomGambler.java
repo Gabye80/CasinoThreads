@@ -11,10 +11,10 @@ public class RandomGambler extends Gambler {
     }
 
     @Override
-    protected void playRound(int houseNumber) {
+    public void playRound(int houseNumber) {
         int number = Main.azar();
         if (!casino.checkCasinoBalance(bet, 36)) {
-            System.out.println("Casino no puede pagar a " + name + ".");
+            System.out.println("The casino can't pay " + name);
             return;
         }
 
@@ -22,11 +22,11 @@ public class RandomGambler extends Gambler {
             int payout = bet * 36;
             increaseBalance(36);
             casino.payToGambler(payout);
-            System.out.println(name + " ganó " + payout + " dólares!");
+            System.out.println(name + " won " + payout + " dollas!");
         } else {
             decreaseBalance();
             casino.winFromGambler(bet);
-            System.out.println(name + " perdió " + bet + " dólares!");
+            System.out.println(name + " lost " + bet + " dollas!");
         }
     }
 }

@@ -6,10 +6,10 @@ package org.example;
  */
 public abstract class Gambler {
 
-    protected String name;
-    protected int balance;
-    protected int bet;
-    protected Casino casino;
+    public String name;
+    public int balance;
+    public int bet;
+    public Casino casino;
 
     public Gambler(String name, Casino casino) {
         this.name = name;
@@ -48,7 +48,7 @@ public abstract class Gambler {
     }
 
     /**
-     * Método abstracto que define el comportamiento de apuesta de cada tipo de jugador.
+     * Método abstracto que define el comportamiento de apuesta para cada tipo de jugador.
      */
-    protected abstract void playRound(int houseNumber);
+    public abstract void playRound(int houseNumber);
 }

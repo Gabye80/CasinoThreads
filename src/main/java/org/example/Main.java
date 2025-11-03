@@ -20,9 +20,8 @@ public class Main {
     public static int azar() {
         return (int) (Math.floor(Math.random() * 37));
     }
-
     /**
-     * Genera una apuesta aleatoria a par (2) o impar (3).
+     * Genera una apuesta aleatoria a par o impar.
      */
     public static int betOddEven() {
         return azar() % 2 == 0 ? 2 : 3;
@@ -61,13 +60,13 @@ public class Main {
 
         int round = 1;
 
-        // Bucle principal de la simulación
+        // Comienzo de apuestas
         while (!casino.isBroke() && gamblers.stream().anyMatch(Gambler::canBet)) {
             System.out.println("\n========== ROUND " + round + " ==========");
 
             int houseNumber = azar();
             if (houseNumber == 0) {
-                System.out.println("¡La casa gana! ¡Salió el 0!");
+                System.out.println("0!!! House wins!");
                 for (Gambler g : gamblers) {
                     casino.winFromGambler(g.getBalance());
                     g.setBalance(0);
@@ -77,7 +76,7 @@ public class Main {
 
             List<Thread> threads = new ArrayList<>();
 
-            // Los jugadores que aún pueden apostar juegan esta ronda
+            // Los jugadores que pueden apostar juegan esta ronda
             for (Gambler g : gamblers) {
                 if (g.canBet()) {
                     Thread t = new Thread(() -> g.playRound(houseNumber));
@@ -86,16 +85,15 @@ public class Main {
                 }
             }
 
-            // Espera a que todos los jugadores terminen sus apuestas
+            // Espera que todos terminen
             for (Thread t : threads) t.join();
 
-            // Mostrar saldo del casino al final de la ronda
             System.out.println("====== CASINO BALANCE : " + casino.getBalance() + " ======");
 
             round++;
-            Thread.sleep(1000); // una ronda por segundo
+            Thread.sleep(1000); // una ronda por segundo (3 segundos por ronda me muero del asco xd)
         }
 
-        System.out.println("\nSimulación del casino terminada.");
+        System.out.println("End of simulation :P");
     }
 }

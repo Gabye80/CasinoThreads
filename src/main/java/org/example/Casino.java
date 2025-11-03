@@ -6,8 +6,8 @@ package org.example;
  */
 public class Casino {
 
-    private int casinoBalance;
-    private boolean casinoBroke = false;
+    public int casinoBalance;
+    public boolean casinoBroke = false;
 
     public Casino(int balance) {
         this.casinoBalance = balance;
@@ -38,7 +38,7 @@ public class Casino {
         casinoBalance -= amount;
         if (casinoBalance < 1000) {
             casinoBroke = true;
-            System.out.println("Casino se quedó sin dinero.");
+            System.out.println("The casino is broke!.");
         }
     }
 

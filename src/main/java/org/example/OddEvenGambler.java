@@ -11,10 +11,10 @@ public class OddEvenGambler extends Gambler {
     }
 
     @Override
-    protected void playRound(int houseNumber) {
+    public void playRound(int houseNumber) {
         int choice = Main.betOddEven();
         if (!casino.checkCasinoBalance(bet, 2)) {
-            System.out.println("Casino no puede pagar a " + name + ".");
+            System.out.println("Casino can't pay" + name);
             return;
         }
 
@@ -22,11 +22,11 @@ public class OddEvenGambler extends Gambler {
             int payout = bet * 2;
             increaseBalance(2);
             casino.payToGambler(payout);
-            System.out.println(name + " ganó " + payout + " dólares!");
+            System.out.println(name + " won " + payout + " dollas!");
         } else {
             decreaseBalance();
             casino.winFromGambler(bet);
-            System.out.println(name + " perdió " + bet + " dólares!");
+            System.out.println(name + " lost " + bet + " dollas!");
         }
     }
 }

@@ -11,10 +11,10 @@ public class YOLOGambler extends Gambler {
     }
 
     @Override
-    protected void playRound(int houseNumber) {
+    public void playRound(int houseNumber) {
         int number = Main.azar();
         if (!casino.checkCasinoBalance(bet, 36)) {
-            System.out.println("Casino no puede pagar a " + name + ".");
+            System.out.println("The casino can't pay " + name + ".");
             return;
         }
 
@@ -23,12 +23,12 @@ public class YOLOGambler extends Gambler {
             increaseBalance(36);
             casino.payToGambler(payout);
             bet = 10; // reinicia la apuesta tras ganar
-            System.out.println(name + " ganó " + payout + " dólares!");
+            System.out.println(name + " won " + payout + " dollas!");
         } else {
             decreaseBalance();
             casino.winFromGambler(bet);
-            bet *= 2; // estrategia YOLO
-            System.out.println(name + " perdió " + bet / 2 + " dólares. Nueva apuesta: " + bet);
+            bet *= 2; // estrategia a la martingala
+            System.out.println(name + " lost " + bet / 2 + " dollas. New bet: " + bet);
         }
     }
 }
