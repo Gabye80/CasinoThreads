@@ -1,52 +1,54 @@
 package org.example;
 
-public class Gambler {
+/**
+ * Clase abstracta que representa un jugador genérico del casino.
+ * Define los métodos comunes a todos los tipos de jugadores.
+ */
+public abstract class Gambler {
 
-    private Integer balance;
-    private Integer bet;
+    protected String name;
+    protected int balance;
+    protected int bet;
+    protected Casino casino;
 
-    public Gambler(Integer balance, Integer bet) {
-        this.balance = balance;
-        this.bet = bet;
+    public Gambler(String name, Casino casino) {
+        this.name = name;
+        this.casino = casino;
+        this.balance = 1000;
+        this.bet = 10;
     }
 
-    public Integer getBalance() {
+    /**
+     * Comprueba si el jugador aún puede apostar.
+     */
+    public boolean canBet() {
+        return balance >= bet;
+    }
+
+    /**
+     * Resta el monto de la apuesta del saldo.
+     */
+    public void decreaseBalance() {
+        balance -= bet;
+    }
+
+    /**
+     * Aumenta el saldo según el multiplicador de la apuesta ganada.
+     */
+    public void increaseBalance(int multiplier) {
+        balance += bet * multiplier;
+    }
+
+    public int getBalance() {
         return balance;
     }
 
-    public Integer getBet() {
-        return bet;
-    }
-
-    public void setBalance(Integer balance) {
+    public void setBalance(int balance) {
         this.balance = balance;
     }
 
-    public void setBet(Integer bet) {
-        this.bet = bet;
-    }
-
-    public void increaseBetYOLO() {
-        this.bet = this.bet * 2;
-    }
-
-    public void decreaseBalance() {
-        this.balance = this.balance - this.bet;
-    }
-
-    public void increaseBalance() {
-        this.balance = this.balance + this.bet * 36;
-    }
-
-    public void increaseBalanceOE() {
-        this.balance = this.balance + this.bet * 2;
-    }
-
-    public boolean checkBalance(int bet) {
-        return this.balance <= bet;
-    }
-
-    public boolean canBet() {
-        return this.balance >= this.bet;
-    }
+    /**
+     * Método abstracto que define el comportamiento de apuesta de cada tipo de jugador.
+     */
+    protected abstract void playRound(int houseNumber);
 }
